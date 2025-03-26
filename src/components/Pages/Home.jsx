@@ -2,6 +2,8 @@ import React from 'react'
 import Navbar from '../Navbar'
 import Hero from'../Hero'
 import About from '../About'
+import Faq from '../Faq'
+import Footer from '../Footer'
 function Home() {
     return (
         <>
@@ -10,7 +12,8 @@ function Home() {
             <Hero/>
         </div>
         <About/>
-        <h1></h1>
+        <Faq/>
+        <Footer/>
         </>
     )
 }
