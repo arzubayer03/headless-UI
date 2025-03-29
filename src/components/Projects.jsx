@@ -1,54 +1,124 @@
-import { Switch } from '@headlessui/react';
-import { useState } from 'react';
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
+import Card from './Card'
+
+const categories = [
+  {
+    name: 'Recent',
+    posts: [
+      {
+        id: 1,
+        title: "Biolink-lite",
+        description: "Lightweight bio link manager",
+        img: "/public/fully-responsive.png",
+        link: "/biolinklite.com",
+      },
+      {
+        id: 2,
+        title: "TaskFlow",
+        description: "Simple task management tool",
+        img: "/public/7501185.jpg",
+        link: "/taskflow.com",
+      },
+      {
+        id: 3,
+        title: "DevBlog",
+        description: "Minimal developer blog",
+        img: "/public/7475606.jpg",
+        link: "/devblog.com",
+      },
+    ],
+  },
+  {
+    name: 'Popular',
+    posts: [
+      {
+        id: 4,
+        title: "ShopEase",
+        description: "E-commerce made easy",
+        img: "/public/7587686.jpg",
+        link: "/shopease.com",
+      },
+      {
+        id: 5,
+        title: "PortfolioX",
+        description: "Personal portfolio template",
+        img: "/public/Responsive-Mockup-1024x804.jpg",
+        link: "/portfoliox.com",
+      },
+      {
+        id: 6,
+        title: "CryptoTrack",
+        description: "Track cryptocurrency prices",
+        img: "/public/7501185.jpg",
+        link: "/cryptotrack.com",
+      },
+    ],
+  },
+  {
+    name: 'Trending',
+    posts: [
+      {
+        id: 7,
+        title: "FitBuddy",
+        description: "Your fitness tracking app",
+        img: "/public/Responsive-Mockup-1024x804.jpg",
+        link: "/fitbuddy.com",
+      },
+      {
+        id: 8,
+        title: "EduMaster",
+        description: "Online learning platform",
+        img: "/public/7501185.jpg",
+        link: "/edumaster.com",
+      },
+      {
+        id: 9,
+        title: "CodeSnip",
+        description: "Save and share code snippets",
+        img: "/public/7587686.jpg",
+        link: "/codesnip.com",
+      },
+      {
+        id: 10,
+        title: "TravelMate",
+        description: "Plan and book your trips",
+        img: "/public/7475606.jpg",
+        link: "/travelmate.com",
+      },
+    ],
+  },
+]
 
 export default function Projects() {
-  const [enabled, setEnabled] = useState(false);
-
   return (
-    <section id="projects" className="py-20">
-      <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-3xl font-semibold">My Projects</h2>
-
-        <div className="mt-8 flex justify-center">
-          <Switch.Group as="div" className="flex items-center space-x-4">
-            <Switch.Label className="text-lg">Show Only Featured</Switch.Label>
-            <Switch
-              checked={enabled}
-              onChange={setEnabled}
-              className={`${enabled ? 'bg-blue-600' : 'bg-gray-200'} relative inline-flex items-center h-6 rounded-full w-11`}
-            >
-              <span className="sr-only">Show Featured Projects</span>
-              <span
-                className={`${enabled ? 'translate-x-6' : 'translate-x-1'} inline-block w-4 h-4 transform bg-white rounded-full`}
-              />
-            </Switch>
-          </Switch.Group>
-        </div>
-
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {enabled ? (
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold">Featured Project</h3>
-              <p className="mt-2">A description of the featured project goes here.</p>
-            </div>
-          ) : (
-            <>
-              <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h3 className="text-xl font-semibold">Project 1</h3>
-                <p className="mt-2">Description of project 1</p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h3 className="text-xl font-semibold">Project 2</h3>
-                <p className="mt-2">Description of project 2</p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h3 className="text-xl font-semibold">Project 3</h3>
-                <p className="mt-2">Description of project 3</p>
-              </div>
-            </>
-          )}
-        </div>
+    <div className="w-full py-10 px-4 bg-gray-900">
+      <div className='flex flex-col items-center mb-10'>
+        <h1 className='text-white font-bold text-4xl uppercase'>My awesome work</h1>
+        <p className='text-pink-600 font-semibold mt-2'>Creative and innovative web development.</p>
       </div>
-    </section>
-  );
+      <div className="w-full px-20">
+        <TabGroup>
+          <TabList className="flex gap-4">
+            {categories.map(({ name }) => (
+              <Tab
+                key={name}
+                className="rounded-full py-1 px-3 text-sm/6 font-semibold text-white focus:outline-none data-[selected]:bg-white/10 data-[hover]:bg-white/5 data-[selected]:data-[hover]:bg-white/10 data-[focus]:outline-1 data-[focus]:outline-white"
+              >
+                {name}
+              </Tab>
+            ))}
+          </TabList>
+          <TabPanels className="mt-3">
+            {categories.map(({ name, posts }) => (
+              <TabPanel key={name} className="rounded-xl bg-white/5 p-3 ">
+                <div className='grid grid-cols-3 gap-4'>
+                {posts.map((post)=><Card title={post.title} description={post.description} image={post.img} link={post.link} />)}
+                </div>
+              </TabPanel>
+            ))}
+          </TabPanels>
+        </TabGroup>
+      </div>
+    </div>
+  )
 }

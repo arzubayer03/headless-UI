@@ -4,10 +4,8 @@ import Button from "./ui/Button";
 export default function Hero() {
   return (
     <div className="relative flex items-center justify-center h-screen bg-gray-900 text-white">
-      {/* Background Image or Gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 opacity-90"></div>
 
-      {/* Content */}
       <Transition
         appear
         show={true}
@@ -23,7 +21,11 @@ export default function Hero() {
             A passionate Web Developer crafting interactive & scalable solutions.
           </p>
           <div className="mt-6">
+            <a href="https://drive.google.com/file/d/1Alhf0HQUWdNJdqCJ1WpKSh5o9_GBCtNk/view?usp=drive_link" 
+            target="blank"
+            >
             <Button variant="headless">Download Resume</Button>
+            </a>
           </div>
         </div>
       </Transition>

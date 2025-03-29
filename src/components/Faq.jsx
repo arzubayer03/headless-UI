@@ -12,7 +12,11 @@ const faqData = [
 
 export default function Faq() {
   return (
-    <div className="h-screen w-full pt-32 px-4 px-6 md:px-20 bg-gray-800">
+    <div className="w-full py-10 px-4 px-6 md:px-20 bg-gray-800">
+        <div className='flex flex-col items-center mb-10'>
+        <h1 className='text-white font-bold text-4xl uppercase'> Frequently Asked Questions</h1>
+        <p className='text-pink-600 font-semibold mt-2'>Common queries and helpful answers.</p>
+      </div>
       <div className="mx-auto w-full divide-y divide-white/5 rounded-xl bg-white/5">
         {faqData.map( item=>
             <Disclosure as="div" className="p-6">
