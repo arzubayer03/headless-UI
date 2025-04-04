@@ -96,7 +96,7 @@ export default function Projects() {
         <h1 className='text-white font-bold text-4xl uppercase'>My awesome work</h1>
         <p className='text-pink-600 font-semibold mt-2'>Creative and innovative web development.</p>
       </div>
-      <div className="w-full px-20">
+      <div className="w-full md:px-20">
         <TabGroup>
           <TabList className="flex gap-4">
             {categories.map(({ name }) => (
@@ -111,7 +111,7 @@ export default function Projects() {
           <TabPanels className="mt-3">
             {categories.map(({ name, posts }) => (
               <TabPanel key={name} className="rounded-xl bg-white/5 p-3 ">
-                <div className='grid grid-cols-3 gap-4'>
+                <div className='flex flex-col md:flex-row gap-4'>
                 {posts.map((post)=><Card title={post.title} description={post.description} image={post.img} link={post.link} />)}
                 </div>
               </TabPanel>

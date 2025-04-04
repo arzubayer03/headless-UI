@@ -1,5 +1,8 @@
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, Transition, DialogPanel, DialogTitle, Checkbox, Select  } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import clsx from 'clsx'
+import { CheckIcon } from '@heroicons/react/16/solid'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { LuMinimize2 } from "react-icons/lu";
 import Button from '../ui/Button'
 
@@ -23,6 +26,24 @@ export default function ContactModal() {
     console.log('Form Submitted:', formData);
     closeModal();
   };
+
+  const country = ["Select", "Bangladesh",
+  "Saudi Arabia",
+  "United States",
+  "Canada",
+  "Germany",
+  "Australia",
+  "India",
+  "United Kingdom",
+  "Japan",
+  "France",
+  "Italy",
+  "Brazil",
+  "South Africa",
+  "United Arab Emirates",
+  "Singapore"]
+  
+  const [enabled, setEnabled] = useState(true)
 
   return (
     <>
@@ -61,16 +82,16 @@ export default function ContactModal() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md bg-gray-900 text-white p-6 rounded-lg shadow-lg">
+              <DialogPanel className="w-full max-w-md bg-gray-900 text-white p-6 rounded-lg shadow-lg">
                 <div className='flex justify-end'>
-                <Button variant="headless"
-                      type="button"
-                      onClick={closeModal}
-                    >
-                      <LuMinimize2 className='text-white'  />
-                    </Button>
+                  <Button variant="headless"
+                    type="button"
+                    onClick={closeModal}
+                  >
+                    <LuMinimize2 className='text-white' />
+                  </Button>
                 </div>
-                <Dialog.Title className="text-2xl font-semibold text-center">Contact Me</Dialog.Title>
+                <DialogTitle className="text-2xl font-semibold text-center">Contact Me</DialogTitle>
 
                 <form onSubmit={handleSubmit} className="space-y-4 mt-4">
                   {/* Name Input */}
@@ -111,8 +132,34 @@ export default function ContactModal() {
                       onChange={handleChange}
                     />
                   </div>
+                  <div className="relative">
+                  <label className="block text-sm font-medium">Select country</label>
+          <Select
+            className={clsx(
+              'mt-3 block w-full appearance-none rounded-lg border-none bg-white/5 py-1.5 px-3 text-sm/6 text-white',
+              'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
+              // Make the text of each option black on Windows
+              '*:text-black'
+            )}
+          >
+            {country.map(item=> <option value="active">{item}</option>)}
+          </Select>
+          <ChevronDownIcon
+            className="group pointer-events-none absolute top-2.5 right-2.5 size-4 fill-white/60"
+            aria-hidden="true"
+          />
+        </div>
+                  <div className='flex space-x-4'>
+                    <Checkbox
+                      checked={enabled}
+                      onChange={setEnabled}
+                      className="group size-6 rounded-md bg-white/10 p-1 ring-1 ring-white/15 ring-inset data-[checked]:bg-white"
+                    >
+                      <CheckIcon className="hidden size-4 fill-black group-data-[checked]:block" />
+                    </Checkbox>
+                    <p>Agree</p>
+                  </div>
 
-                  {/* Buttons */}
                   <div className="flex justify-between gap-4">
                     <Button variant="headless"
                       type="submit"
@@ -121,7 +168,7 @@ export default function ContactModal() {
                     </Button>
                   </div>
                 </form>
-              </Dialog.Panel>
+              </DialogPanel>
             </Transition.Child>
           </div>
         </Dialog>

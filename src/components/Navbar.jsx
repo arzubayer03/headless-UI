@@ -1,7 +1,8 @@
-import { Menu, Transition } from '@headlessui/react';
+import { Menu, Transition, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { Fragment } from 'react';
 import Button from './ui/Button';
-import Contact from './contact/Contact';
+import MyPopover from './ui/Popover';
+import Search from './ui/Search';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -23,14 +24,16 @@ export default function Navbar() {
         </a>
         <div className="hidden md:flex space-x-4">
           {navItems.map(item => <a href={item.link} className="text-white border-b-2 border-gray-800 hover:border-pink-500">{item.name}</a>)}
+          <MyPopover />
+          <Search />
         </div>
         {/* <Button variant="headless">Contact</Button> */}
         <Menu as="div" className="relative md:hidden">
-          <Menu.Button className="text-white">
+          <MenuButton className="text-white">
             <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-          </Menu.Button>
+          </MenuButton>
           <Transition
             as={Fragment}
             enter="transition ease-out duration-100"
@@ -40,9 +43,9 @@ export default function Navbar() {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 z-20  mt-2 w-48 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <MenuItems className="absolute right-0 z-20  mt-2 w-48 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="p-1">
-                {navItems.map(item => <Menu.Item>
+                {navItems.map(item => <MenuItem>
                   {({ active }) => (
                     <a
                       href={item.link}
@@ -51,9 +54,9 @@ export default function Navbar() {
                       {item.name}
                     </a>
                   )}
-                </Menu.Item>)}
+                </MenuItem>)}
               </div>
-            </Menu.Items>
+            </MenuItems>
           </Transition>
         </Menu>
       </div>
